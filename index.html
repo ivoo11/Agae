@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGAE - Asociación Gremial de la Abogacía del Estado</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary-color: #19248B;
+    --primary-color-light: #3a4dbd;
+    --text-color: #333333;
+    --bg-light: #f8f9fa;
+  }
+
+  /* Reset básico */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+    scroll-padding-top: 80px;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+  }
+
+  /* Navbar */
+  .navbar { background-color: var(--primary-color); }
+  .navbar-brand, .navbar-nav .nav-link { color: white !important; }
+  .navbar-nav .nav-link:hover { color: var(--primary-color-light) !important; }
+  .navbar .btn.btn-primary {
+    background-color: #0d6efd; color: white !important; border: none;
+  }
+  .navbar .btn.btn-primary:hover { background-color: #0b5ed7; color: white !important; }
+
+  /* ===== HERO (carrusel mejorado) ===== */
+  .hero { position: relative; }
+  .hero .carousel,
+  .hero .carousel-inner,
+  .hero .carousel-item { height: 75vh; }
+  @media (max-width: 767.98px) {
+    .hero .carousel,
+    .hero .carousel-inner,
+    .hero .carousel-item { height: 90vh; }
+  }
+  .hero-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  /* Overlay con degradé + leve blur para legibilidad */
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.55) 100%);
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+  }
+  /* Contenido del caption centrado a la grilla */
+  .hero .carousel-caption {
+    position: absolute; left: 0; right: 0; top: 50%; bottom: auto;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    text-align: left;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+  .hero .carousel-caption .lead { max-width: 46ch; }
+
+  /* Controles tipográficos, discretos */
+  .carousel-control-prev, .carousel-control-next { width: auto; padding: .5rem .75rem; }
+  .carousel-control-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.6);
+    color: #fff; background: rgba(0,0,0,.15);
+    font-size: 28px; line-height: 1;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .carousel-control-prev:hover .carousel-control-icon,
+  .carousel-control-next:hover .carousel-control-icon {
+    background: rgba(0,0,0,.35); transform: translateY(-1px);
+  }
+
+  /* Indicadores minimalistas */
+  .carousel-indicators { bottom: 18px; }
+  .carousel-indicators [data-bs-target]{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(255,255,255,.7);
+    transition: transform .2s ease, background-color .2s ease;
+  }
+  .carousel-indicators .active { background: var(--primary-color); transform: scale(1.1); }
+
+  /* Tipos en mobile */
+  @media (max-width: 767.98px) {
+    .hero .carousel-caption { padding: 0 1.25rem; }
+    .hero .carousel-caption h1 { font-size: 1.8rem; }
+    .hero .carousel-caption .lead { font-size: 1rem; }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-fade .carousel-item { transition: none; }
+  }
+
+  /* Secciones generales */
+  .banner-separador {
+    min-height: 45vh; padding: 3rem 1rem;
+    background: linear-gradient(135deg, #19248B, #3a4dbd);
+    color: white; display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  section { display: flex; flex-direction: column; justify-content: center; padding: 60px 0; }
+  .section-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 600;
+    color: var(--primary-color); margin-bottom: 30px;
+  }
+
+  /* WhatsApp flotante */
+  #whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+  #whatsapp-float a {
+    background-color: #25D366; color: white; padding: 12px 16px; border-radius: 50%;
+    font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+  }
+
+  /* Footer */
+  footer { background-color: var(--primary-color); color: white; padding: 30px 0; }
+  footer a { color: white; text-decoration: none; }
+  footer a:hover { color: var(--primary-color-light); }
+
+  /* Tarjetas e imágenes */
+  .card-img-top { height: 220px; object-fit: cover; width: 100%; }
+  .section-img { width: 100%; height: 100%; max-height: 350px; object-fit: cover; border-radius: 10px; }
+  .icon-primary { color: #19248B; }
+  .historia-img { width: 100%; height: auto; max-height: 400px; object-fit: cover; border-radius: 8px; }
+  .card-title { font-weight: 600 !important; }
+
+  /* Novedades (cards) */
+  .news-card { text-decoration: none; color: inherit; transition: transform 0.2s ease; }
+  .news-card:hover { transform: scale(1.01); }
+  .card-img-overlay-custom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(25, 36, 139, 0.85); color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 14px;
+  }
+  .card-img-top-container { position: relative; height: 200px; overflow: hidden; }
+  .card-img-top { height: 100%; width: 100%; object-fit: cover; }
+</style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <!-- (fix) clase duplicada removida -->
+      <a class="navbar-brand" href="#inicio" aria-label="Ir al inicio">
+        <img src="assets/nav-icon.png" alt="AGAE Logo" height="70">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#historia">Historia</a></li>
+          <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="#medios">Medios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#capacitacion">Capacitación</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-primary ms-2" href="afiliacion.html" target="_blank" rel="noopener">Afiliate Ahora</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO mejorado ===== -->
+  <section id="inicio" class="hero">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Carrusel principal">
+      
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+      </div>
+
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <picture>
+            <!-- opcional: recorte mobile -->
+            <source media="(max-width: 767.98px)" srcset="assets/img/carru_m1.jpg">
+            <img src="assets/img/carru.jpg" class="d-block w-100 hero-img" alt="Abogacía del Estado trabajando en equipo">
+          </picture>
+          <div class="hero-overlay" aria-hidden="true"></div>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="display-5 fw-bold text-white">Defendé tu profesión</h1>
+              <p class="lead text-white-50 mb-4">Sumate a AGAE y fortalecé tu carrera en el Estado.</p>
+              <div class="d-flex gap-3">
+                <a href="afiliacion.html" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Afiliate ahora</a>
+                <a href="#servicios" class="btn btn-outline-light btn-lg">Ver beneficios</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <picture>
+            <source media="(max-width: 767.98px)" srcset="assets/img/carru_m2.jpg">
+            <img src="assets/img/carru2.jpg" class="d-block w-100 hero-img" alt="Capacitaciones para la abogacía del Estado">
+          </picture>
+          <div class="hero-overlay" aria-hidden="true"></div>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="display-5 fw-bold text-white">Capacitación continua</h1>
+              <p class="lead text-white-50 mb-4">Cursos, diplomaturas y seminarios exclusivos.</p>
+              <a href="#capacitacion" class="btn btn-outline-light btn-lg">Ver cursos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <picture>
+            <source media="(max-width: 767.98px)" srcset="assets/img/carru_m3.jpg">
+            <img src="assets/img/carru3.jpg" class="d-block w-100 hero-img" alt="Representación gremial y participación">
+          </picture>
+          <div class="hero-overlay" aria-hidden="true"></div>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="display-5 fw-bold text-white">Tu gremio, tu voz</h1>
+              <p class="lead text-white-50 mb-4">Participá en la defensa de tus derechos laborales.</p>
+              <a href="#nosotros" class="btn btn-light btn-lg">Conocé la Comisión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Anterior">
+        <span class="carousel-control-icon" aria-hidden="true">‹</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Siguiente">
+        <span class="carousel-control-icon" aria-hidden="true">›</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Botón flotante de WhatsApp (fix: URL) -->
+  <div id="whatsapp-float">
+    <a href="https://wa.me/5491171333588?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20AGAE" target="_blank" rel="noopener" aria-label="Chat en WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- ===== Servicios ===== -->
+  <section id="servicios" class="bg-light">
+    <div class="container">
+      <h2 class="section-title">Nuestros principales servicios</h2>
+      <div class="row">
+        <!-- Asesoramiento legal y gremial -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-balance-scale fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Asesoramiento legal y gremial</h5>
+              <p class="card-text">Orientación jurídica para abogados del Estado en cuestiones laborales, salariales y éticas.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Capacitación continua -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-chalkboard-teacher fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Capacitación continua</h5>
+              <p class="card-text">Cursos, Diplomaturas, Programas de actualización y seminarios para mantenerte actualizado/a en diferentes especificidades del Derecho.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Seguro de vida incluido -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-heartbeat fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Seguro de vida incluido</h5>
+              <p class="card-text">Todos los afiliados cuentan con cobertura de seguro de vida sin costo adicional.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Oficinas y coworking -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-briefcase fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Oficinas y espacios de trabajo</h5>
+              <p class="card-text">Espacios disponibles para uso profesional: coworking, salas de reuniones y atención de clientes.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Red profesional -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-users fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Red profesional</h5>
+              <p class="card-text">Conectate con colegas de todo el país para compartir experiencias, oportunidades y colaboración profesional.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Visibilidad institucional -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-bullhorn fa-2x icon-primary mb-3" aria-hidden="true"></i>
+              <h5 class="card-title">Visibilidad institucional</h5>
+              <p class="card-text">Participá en medios, publicaciones y actividades que refuerzan el valor de la abogacía estatal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Historia ===== -->
+  <section id="historia" class="container">
+    <h2 class="section-title">El Gremio</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="assets/img/agae2.jpg" alt="Historia de AGAE" class="img-fluid historia-img">
+      </div>
+      <div class="col-md-6">
+        <p>
+          AGAE se fundó con el objetivo de reunir y representar a los abogados del Estado, brindando apoyo jurídico y gremial a lo largo de todo el país. Con el paso de los años, hemos logrado mejoras en condiciones laborales, mayor participación institucional, y reconocimiento profesional.
+        </p>
+        <p>
+          Nuestro recorrido incluye hitos como convenios nacionales, becas y capacitaciones profesionales, y acciones judiciales y administrativas que han beneficiado a nuestros afiliados.
+        </p>
+        <p>
+          Sigamos recorriendo juntos este camino, sumate a formar parte de la Asociación Gremial de la Abogacía del Estado.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Nosotros ===== -->
+  <section id="nosotros" class="bg-light">
+    <div class="container">
+      <h2 class="section-title text-center">Comisión Directiva AGAE</h2>
+
+      <!-- Card principal -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-4">
+          <div class="card text-center border-0 shadow-sm" style="background-color: #19248B; color: white;">
+            <img src="assets/img/ramos.jpg" class="card-img-top rounded-circle mx-auto mt-4" style="width: 180px; height: 180px; object-fit: cover;" alt="Secretario General">
+            <div class="card-body">
+              <h5 class="card-title">Dr. Rubén Ramos</h5>
+              <p class="text-white-50">Secretario General</p>
+              <div class="mt-3 d-flex justify-content-center gap-3">
+                <a href="https://x.com/rubenramosok" target="_blank" rel="noopener" class="text-white text-decoration-none" aria-label="X de Rubén Ramos">
+                  <i class="fab fa-x-twitter fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="https://instagram.com/rubenramosok" target="_blank" rel="noopener" class="text-white text-decoration-none" aria-label="Instagram de Rubén Ramos">
+                  <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="https://facebook.com/rubenramosok" target="_blank" rel="noopener" class="text-white text-decoration-none" aria-label="Facebook de Rubén Ramos">
+                  <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secretarios -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h4 class="text-primary">Secretarios</h4>
+          <div class="p-4 rounded shadow-sm" style="background-color: #19248B; color: white;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dr. Roberto Álvarez</strong> <span class="text-white-50">– Secretario Adjunto</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dr. Marcelo Bertoa</strong> <span class="text-white-50">– Secretario Gremial</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dra. Mirna Lozano Bosch</strong> <span class="text-white-50">– Secretaria de Carrera</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Mg. Alejandra Marcela Santos</strong> <span class="text-white-50">– Secretaria Académica</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dr. Santiago Duizeide</strong> <span class="text-white-50">– Secretario de Comunicación y Relaciones Institucionales</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dra. Elizabeth Armoa</strong> <span class="text-white-50">– Secretaria de Igualdad y Género</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dra. Gabriela Glasman</strong> <span class="text-white-50">– Secretaria de Turismo y Recreación</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dr. Ignacio Zaldarriaga</strong> <span class="text-white-50">– Secretario de Finanzas</span></li>
+              <li class="list-group-item bg-transparent text-white border-0"><strong>Dra. Agustina Aguirre</strong> <span class="text-white-50">– Secretaria de Actas</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Vocales -->
+        <div class="col-md-4 mb-4">
+          <h4 class="text-primary">Vocales titulares</h4>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Dr. Gustavo Silva Tamayo</li>
+            <li class="list-group-item">Dr. Ramiro Jugo</li>
+            <li class="list-group-item">Dr. Nicolás Gutierrez Lanoel</li>
+            <li class="list-group-item">Dr. Daniel Descals</li>
+            <li class="list-group-item">Dr. Daniel Policella</li>
+          </ul>
+          <h5 class="text-primary">Vocales suplentes</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dr. Patricio Martinez</li>
+            <li class="list-group-item">Dr. Guillermo Bistacco</li>
+            <li class="list-group-item">Dr. Ramiro Lovallo</li>
+          </ul>
+        </div>
+
+        <!-- Revisores -->
+        <div class="col-md-4 mb-4">
+          <h4 class="text-primary">Revisores de cuenta titulares</h4>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Dra. Cynthia Verónica Alvarez Tagliabue</li>
+            <li class="list-group-item">Dra. Marcela Gonzalez Elizondo</li>
+            <li class="list-group-item">Dr. Alejandro Spessot</li>
+          </ul>
+          <h5 class="text-primary">Revisor suplente</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dra. Alejandra Bosque Sanjurjo</li>
+          </ul>
+        </div>
+
+        <!-- Tribunal de Ética -->
+        <div class="col-md-4 mb-4">
+          <h4 class="text-primary">Tribunal de ética titulares</h4>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Dr. Cristian Dellepiane</li>
+            <li class="list-group-item">Dr. Pablo Tosco</li>
+            <li class="list-group-item">Dra. Rosana Papazian</li>
+          </ul>
+          <h5 class="text-primary">Tribunal de ética suplente</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dra. María del Pilar Gonzalez Hermo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Medios / Novedades ===== -->
+  <section id="medios" class="container">
+    <h2 class="section-title">Novedades</h2>
+    <div class="row" id="ultimas-noticias"><!-- Noticias dinámicas --></div>
+    <div class="text-center mt-4">
+      <a href="noticias.html" target="_blank" rel="noopener" class="btn btn-outline-primary">Ver noticias anteriores</a>
+    </div>
+  </section>
+
+  <!-- ===== Capacitación ===== -->
+  <section id="capacitacion" class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Imagen -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <img src="assets/img/agae.jpg" alt="Capacitación" class="section-img img-fluid">
+        </div>
+        <!-- Texto -->
+        <div class="col-md-6 text-center text-md-start">
+          <h2 class="section-title text-md-start text-center">Capacitación</h2>
+          <h4>Formate, actualizate, conectate</h4>
+          <p>En AGAE apostamos a la formación continua de los abogados del Estado. 
+          Accedé a cursos, seminarios y diplomaturas para seguir creciendo profesionalmente y ampliar tu red.</p>
+          <a href="capacitacion.html" target="_blank" rel="noopener" class="btn btn-primary mt-3">Explorá la oferta académica</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="pt-5 pb-3" style="background-color: #19248B; color: white;">
+    <div class="container">
+      <div class="row">
+        <!-- Logo / Nombre -->
+        <div class="col-md-4 mb-4">
+          <a class="navbar-brand" href="#inicio">
+            <img src="assets/nav-icon.png" alt="AGAE Logo" height="80">
+          </a>
+        </div>
+        <!-- Dónde encontrarnos -->
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Dónde encontrarnos</h5>
+          <p class="small mb-1"><i class="fas fa-map-marker-alt me-2"></i> Av. Pte. Julio A. Roca 620 - Piso 6, CABA, Argentina</p>
+          <p class="small mb-1"><i class="fas fa-envelope me-2"></i> contacto@agae.org.ar</p>
+          <p class="small"><i class="fas fa-phone me-2"></i> +54 11 7133-3588</p>
+        </div>
+        <!-- Redes sociales -->
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Seguinos</h5>
+          <a href="https://www.facebook.com/rubenramosok" target="_blank" rel="noopener" class="text-white me-3" aria-label="Facebook AGAE"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="https://www.x.com/agaeok" target="_blank" rel="noopener" class="text-white me-3" aria-label="X AGAE"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://www.instagram.com/agaeok" target="_blank" rel="noopener" class="text-white me-3" aria-label="Instagram AGAE"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+      <div class="text-center border-top pt-3 mt-3" style="border-color: rgba(255,255,255,0.2) !important;">
+        <small>&copy; 2025 AGAE - Todos los derechos reservados</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+
+  <!-- Opcional: remove Instagram feed en mobile si existiera -->
+  <script>
+    if (window.innerWidth <= 768) {
+      const igSection = document.getElementById('instagram-feed');
+      if (igSection) igSection.remove();
+    }
+  </script>
+
+  <!-- Novedades dinámicas desde noticias.html -->
+  <script>
+    fetch('noticias.html')
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const tarjetas = Array.from(doc.querySelectorAll('.news-card'));
+
+        tarjetas.sort((a, b) => new Date(b.dataset.fecha) - new Date(a.dataset.fecha));
+        const ultimas = tarjetas.slice(0, 3);
+        const contenedor = document.getElementById('ultimas-noticias');
+
+        ultimas.forEach(noticia => {
+          const imgContainer = noticia.querySelector('.card-img-top-container')?.outerHTML || '';
+          const body = noticia.querySelector('.card-body')?.outerHTML || '';
+          const href = noticia.getAttribute('href') || '#';
+
+          const cardHTML = `
+            <div class="col-md-4 mb-4">
+              <a href="${href}" target="_blank" rel="noopener" class="card h-100 shadow-sm text-decoration-none text-dark">
+                ${imgContainer}
+                ${body}
+              </a>
+            </div>`;
+          contenedor.insertAdjacentHTML('beforeend', cardHTML);
+        });
+      })
+      .catch(error => console.error('No se pudieron cargar las noticias dinámicamente:', error));
+  </script>
+
+  <!-- Respeta “prefers-reduced-motion”: Pausa carrusel si el usuario lo pide -->
+  <script>
+    (function(){
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const el = document.querySelector('#heroCarousel');
+      if (mq.matches && el) {
+        const carousel = bootstrap.Carousel.getOrCreateInstance(el, { interval: false, ride: false });
+        carousel.pause();
+      }
+    })();
+  </script>
+</body>
+</html>

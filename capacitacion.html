@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capacitaciones - AGAE</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .navbar {
+      background-color: #19248B;
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+    }
+    .course-card {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease;
+      position: relative;
+      display: block;
+    }
+    .course-card:hover {
+      transform: scale(1.01);
+    }
+    .disabled-card {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .card-img-overlay-custom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(25, 36, 139, 0.85);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .card-img-top-container {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .card-img-top {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    .estado-finalizado {
+      color: #dc3545;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" class="nav-link" href="index.html#inicio">
+      <img src="assets/nav-icon.png" alt="AGAE Logo" height="70">
+    </a>
+  </div>
+</nav>
+
+<!-- Contenido -->
+<div class="container my-5">
+  <h2 class="text-center mb-4 text-primary">Capacitaciones AGAE</h2>
+  <div class="row g-4" id="capacitacionesContainer">
+
+    <!-- Curso 1 (vigente) -->
+    <div class="col-md-4">
+      <a href="https://link-inscripcion-curso1.com" target="_blank" class="card course-card" data-inicio="2025-10-20">
+        <div class="card-img-top-container">
+          <img src="assets/img/carru.jpg" class="card-img-top" alt="Curso 1">
+          <div class="card-img-overlay-custom">INSCRIPCIONES ABIERTAS</div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Curso de Derecho Laboral Público</h5>
+          <p class="card-text">Actualización en jurisprudencia y normativa vigente.</p>
+          <p class="text-muted"><strong>Inicio:</strong> <span class="inicio-fecha">20 de octubre de 2025</span></p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Curso 2 (ya comenzó) -->
+    <div class="col-md-4">
+      <a href="https://link-inscripcion-curso2.com" target="_blank" class="card course-card" data-inicio="2025-08-15">
+        <div class="card-img-top-container">
+          <img src="assets/img/carru2.jpg" class="card-img-top" alt="Curso 2">
+          <div class="card-img-overlay-custom">INSCRIPCIONES ABIERTAS</div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Diplomatura en Gestión Pública</h5>
+          <p class="card-text">Diseño, implementación y evaluación de políticas.</p>
+          <p class="text-muted"><strong>Inicio:</strong> <span class="inicio-fecha">15 de agosto de 2025</span></p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Curso 3 (ya comenzó) -->
+    <div class="col-md-4">
+      <a href="https://link-inscripcion-curso3.com" target="_blank" class="card course-card" data-inicio="2025-07-10">
+        <div class="card-img-top-container">
+          <img src="assets/img/carru3.jpg" class="card-img-top" alt="Curso 3">
+          <div class="card-img-overlay-custom">INSCRIPCIONES ABIERTAS</div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Webinar sobre Ética Judicial</h5>
+          <p class="card-text">Perspectivas sobre la independencia judicial.</p>
+          <p class="text-muted"><strong>Inicio:</strong> <span class="inicio-fecha">10 de julio de 2025</span></p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('capacitacionesContainer');
+    const cards = Array.from(container.querySelectorAll('.course-card'));
+    const hoy = new Date();
+
+    cards.forEach(card => {
+      const inicio = new Date(card.dataset.inicio);
+      const fechaSpan = card.querySelector('.inicio-fecha');
+      const overlay = card.querySelector('.card-img-overlay-custom');
+
+      if (inicio < hoy) {
+        card.classList.add('disabled-card');
+        fechaSpan.innerHTML = '<span class="estado-finalizado">Este curso ha comenzado</span>';
+        if (overlay) overlay.remove(); // ✅ Elimina el cartel
+      }
+    });
+
+    // Ordenar por fecha ascendente
+    const items = Array.from(container.children);
+    items.sort((a, b) => {
+      const fechaA = new Date(a.querySelector('.course-card').dataset.inicio);
+      const fechaB = new Date(b.querySelector('.course-card').dataset.inicio);
+      return fechaA - fechaB;
+    });
+    items.forEach(item => container.appendChild(item));
+  });
+</script>
+</body>
+</html>

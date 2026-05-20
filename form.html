@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Afiliación - AGAE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.png" />
+
+  <style>
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .form-container h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #19248B;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .form-container h5 {
+      font-family: 'Montserrat', sans-serif;
+      color: #19248B;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 100;
+    }
+
+    .form-control, .form-select {
+      border-radius: 8px;
+      border: 1px solid #6c757d;
+      color: #212529;
+      padding: 12px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #19248B;
+      box-shadow: 0 0 0 0.2rem rgba(25,36,139,0.25);
+    }
+
+    .btn-custom {
+      background-color: #19248B;
+      border-color: #19248B;
+      color: white;
+      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .btn-custom:hover {
+      background-color: #142062;
+      border-color: #142062;
+      color: white;
+    }
+
+        input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #495057; /* gris oscuro para el borde */
+    border-radius: 4px;        /* esquinas levemente redondeadas */
+    appearance: none;          /* elimina el estilo nativo del navegador */
+    cursor: pointer;
+    position: relative;
+    }
+
+    /* Estado marcado (con tilde) */
+    input[type="checkbox"]:checked {
+    background-color: #19248B; /* azul institucional */
+    border-color: #19248B;
+    }
+
+    input::placeholder {
+    text-transform: none;
+    }
+
+    .form-check-label {
+      font-weight: 500;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Estás a un paso de formar parte.<br>Finalizá el formulario para sumarte a AGAE.</h2>
+    <form>
+
+      <!-- Datos Personales -->
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-4 mb-3"><input type="text" style="text-transform: capitalize;"class="form-control" placeholder="Apellido/s *" required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="text" style="text-transform: capitalize;" class="form-control" placeholder="Nombre/s *" required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="email" class="form-control" placeholder="Email *" required></div>
+          <div class="col-md-4 mb-3"><input type="text" class="form-control" placeholder="DNI *" inputmode="numeric" pattern="[0-9]*"  required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="tel" class="form-control" placeholder="Whatsapp *" inputmode="numeric" 
+            pattern="[0-9]*"required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <select class="form-select" required>
+              <option value="" disabled selected hidden>Sexo *</option>
+              <option>FEMENINO</option>
+              <option>MASCULINO</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <input type="text" class="form-control" placeholder="Fecha de Nacimiento *" onfocus="(this.type='date')"          onblur="if(this.value===''){this.type='text'}" inputmode="numeric" pattern="[0-9]*" required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="text" class="form-control" placeholder="Domicilio (Calle y Nº) *" required></div>
+
+          <div class="col-md-4 mb-3"><input type="text" class="form-control" placeholder="Código Postal *" inputmode="numeric" 
+            pattern="[0-9]*"required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="text" style="text-transform: capitalize;" class="form-control" placeholder="Localidad *" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <select class="form-select" required>
+            <option value="" disabled selected hidden>Provincia *</option>
+            <option>Buenos Aires</option>
+            <option>Ciudad Autónoma de Buenos Aires</option>
+            <option>Catamarca</option>
+            <option>Chaco</option>
+            <option>Chubut</option>
+            <option>Córdoba</option>
+            <option>Corrientes</option>
+            <option>Entre Ríos</option>
+            <option>Formosa</option>
+            <option>Jujuy</option>
+            <option>La Pampa</option>
+            <option>La Rioja</option>
+            <option>Mendoza</option>
+            <option>Misiones</option>
+            <option>Neuquén</option>
+            <option>Río Negro</option>
+            <option>Salta</option>
+            <option>San Juan</option>
+            <option>San Luis</option>
+            <option>Santa Cruz</option>
+            <option>Santa Fe</option>
+            <option>Santiago del Estero</option>
+            <option>Tierra del Fuego, Antártida e Islas del Atlántico Sur</option>
+            <option>Tucumán</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <select class="form-select">
+              <option value="" disabled selected hidden>Estudios alcanzados</option>
+              <option>GRADO</option>
+              <option>POSGRADO</option>
+              <option>DOCTORADO</option>
+            </select>
+          </div>
+
+      <!-- Datos Laborales -->
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <select class="form-select" required>
+              <option value="" disabled selected hidden>Organismo de trabajo *</option>
+              <option>Congreso de la Nación Argentina</option>
+              <option>Corte Suprema de Justicia de la Nación</option>
+              <option>Honorable Cámara de Diputados de la Nación</option>
+              <option>Honorable Cámara de Senadores de la Nación</option>
+              <option>Jefatura de Gabinete de Ministros</option>
+              <option>Ministerio de Capital Humano</option>
+              <option>Ministerio de Defensa</option>
+              <option>Ministerio de Desregulación y Transformación del Estado</option>
+              <option>Ministerio de Economía</option>
+              <option>Ministerio de Justicia</option>
+              <option>Ministerio de Relaciones Exteriores, Comercio Internacional y Culto</option>
+              <option>Ministerio de Salud</option>
+              <option>Ministerio de Seguridad Nacional</option>
+              <option>Ministerio del Interior</option>
+              <option>Ministerio Público de la Defensa</option>
+              <option>Ministerio Público Fiscal – Procuración General de la Nación</option>
+              <option>Presidencia de la Nación</option>
+              <option>Secretaría de Comunicación y Medios</option>
+              <option>Secretaría de Cultura</option>
+              <option>Secretaría de Inteligencia de Estado</option>
+              <option>Secretaría General</option>
+              <option>Secretaría Legal y Técnica</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3"><input type="text" style="text-transform: capitalize;" class="form-control" placeholder="Dependencia *" required>
+          </div>
+          <div class="col-md-4 mb-3"><input type="text" style="text-transform: capitalize;" class="form-control" placeholder="Área/Oficina *" required>
+          </div>
+        </div>
+      </div>
+
+<!-- Declaración y aceptación de condiciones -->
+<div class="form-section">
+  <h5 class="mb-3">Declaración y aceptación de condiciones</h5>
+  <p class="text-muted">
+    Al completar este formulario, declaro haber leído y aceptado los 
+    <a href="terminos.html" target="_blank">Términos y Condiciones de Afiliación</a>, que incluyen el consentimiento para el cobro mensual de la cuota sindical, el acceso a los servicios brindados por AGAE y la recepción de documentación por medios digitales.
+  </p>
+
+  <div class="form-check mb-4">
+    <input type="checkbox" class="form-check-input" id="aceptoCondiciones" required>
+    <label class="form-check-label" for="aceptoCondiciones">
+      Acepto los términos y condiciones detallados anteriormente *
+    </label>
+  </div>
+</div>
+
+<!-- Botón de envío -->
+<button type="submit" class="btn btn-custom">Finalizar Afiliación</button>
+
+<script>
+  document.getElementById("afiliacionForm").addEventListener("submit", function(e) {
+    const check = document.getElementById("aceptoCondiciones");
+    if (!check.checked) {
+      e.preventDefault(); // evita que se envíe
+      alert("Debes aceptar los términos y condiciones para continuar.");
+    }
+  });
+</script>
+
+</body>
+</html>
