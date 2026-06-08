@@ -17,6 +17,37 @@
 
 <body>
 
+  <!-- POPUP-->
+  <div class="personeria-popup" id="personeriaPopup">
+    <div class="personeria-modal">
+
+      <button class="personeria-close" type="button" aria-label="Cerrar aviso">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="personeria-image">
+        <img src="assets/img/personeria.jpg" alt="AGAE">
+      </div>
+
+      <div class="personeria-content">
+        <span>AGAE informa</span>
+
+        <h2>Presentamos el pedido de personería gremial</h2>
+
+        <p>
+          Este paso fortalece nuestra representación federal y nos permite seguir
+          trabajando por mejores condiciones laborales, más derechos y una voz
+          colectiva para la abogacía pública.
+        </p>
+
+        <a href="afiliacion.html" class="personeria-btn" target="_blank" rel="noopener">
+          Afiliate ahora
+        </a>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
@@ -565,6 +596,34 @@
         carousel.pause();
       }
     })();
+  </script>
+
+  <!-- POPUP -->
+  <script>
+  const personeriaPopup = document.getElementById("personeriaPopup");
+  const personeriaModal = document.querySelector(".personeria-modal");
+  const personeriaClose = document.querySelector(".personeria-close");
+
+  function cerrarPopup() {
+    personeriaPopup.classList.add("is-hidden");
+  }
+
+  /* Cerrar con la X */
+  personeriaClose.addEventListener("click", cerrarPopup);
+
+  /* Cerrar haciendo click afuera */
+  personeriaPopup.addEventListener("click", (e) => {
+    if (!personeriaModal.contains(e.target)) {
+      cerrarPopup();
+    }
+  });
+
+  /* Cerrar con ESC */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      cerrarPopup();
+    }
+  });
   </script>
 </body>
 </html>

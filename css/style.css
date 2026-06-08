@@ -1746,3 +1746,166 @@ footer .container{
         padding:10px 14px;
     }
 }
+
+/* POPUP PERSONERÍA - EDITORIAL */
+
+.personeria-popup{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.15);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+
+.personeria-modal{
+  position:relative;
+  width:100%;
+  max-width:1080px;
+  min-height:560px;
+  background:#fff;
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  box-shadow:0 30px 90px rgba(0,0,0,.22);
+  animation:popupIn .45s ease;
+}
+
+.personeria-image{
+  min-height:560px;
+  overflow:hidden;
+}
+
+.personeria-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(100%);
+}
+
+.personeria-content{
+  padding:72px 72px 60px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  color:#111;
+}
+
+.personeria-content span{
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-weight:700;
+  color:#19248B;
+  margin-bottom:22px;
+}
+
+.personeria-content h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(2.4rem, 4.5vw, 4.7rem);
+  line-height:.95;
+  letter-spacing:-.06em;
+  font-weight:600;
+  margin-bottom:28px;
+  color:#111;
+}
+
+.personeria-content p{
+  font-size:1.12rem;
+  line-height:1.65;
+  color:#555;
+  max-width:520px;
+  margin-bottom:34px;
+}
+
+.personeria-btn{
+  width:max-content;
+  background:#19248B;
+  color:#fff;
+  text-decoration:none;
+  padding:16px 34px;
+  font-weight:700;
+  border-radius:999px;
+  transition:.25s ease;
+}
+
+.personeria-btn:hover{
+  background:#4656e8;
+  color:#fff;
+}
+
+.personeria-close{
+  position:absolute;
+  top:24px;
+  right:24px;
+  z-index:5;
+  width:42px;
+  height:42px;
+  border:0;
+  background:transparent;
+  color:#111;
+  font-size:1.6rem;
+  cursor:pointer;
+}
+
+.personeria-popup.is-hidden{
+  display:none;
+}
+
+@keyframes popupIn{
+  from{
+    opacity:0;
+    transform:translateY(18px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@media(max-width:768px){
+  .personeria-popup{
+    padding:16px;
+    align-items:center;
+  }
+
+  .personeria-modal{
+    max-height:92vh;
+    overflow:auto;
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .personeria-image{
+    min-height:260px;
+    height:260px;
+  }
+
+  .personeria-content{
+    padding:38px 28px 34px;
+  }
+
+  .personeria-content h2{
+    font-size:2.35rem;
+    letter-spacing:-.05em;
+  }
+
+  .personeria-content p{
+    font-size:1rem;
+  }
+
+  .personeria-close{
+    top:14px;
+    right:14px;
+    background:rgba(255,255,255,.88);
+    border-radius:50%;
+  }
+
+  .personeria-btn{
+    width:100%;
+    text-align:center;
+  }
+}
